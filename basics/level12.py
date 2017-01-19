@@ -1,0 +1,21 @@
+#http://www.pythonchallenge.com/pc/return/evil.html
+
+file = open('d:/evil2.gfx', 'rb')
+data = file.read()
+print(type(data))
+d1 = open('d:/1.jpg', 'wb')
+d2 = open('d:/2.jpg', 'wb')
+d3 = open('d:/3.jpg', 'wb')
+d4 = open('d:/4.jpg', 'wb')
+d5 = open('d:/5.jpg', 'wb')
+
+d1.write(data[1::5])
+d2.write(data[2::5])
+d3.write(data[3::5] )
+d4.write(data[4::5])
+d5.write(data[0::5])
+d1.close()
+d2.close()
+d3.close()
+d4.close()
+d5.close()
