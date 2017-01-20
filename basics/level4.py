@@ -1,5 +1,6 @@
 import urllib
 import urllib.request
+import http.cookiejar
 
 prefix = "http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing="
 u = prefix + '12345'
@@ -7,13 +8,26 @@ u = prefix + '12345'
 i =0
 while True :
 
-    r = urllib.request.urlopen(u)
-    response = str(r.read())
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    urllib.request.install_opener(opener)
+    print(u)
+
+
+
+    #opener = urllib.request.HTTPCookieProcessor()
+    #urllib.request.install_opener(opener)
+    r = opener.open(u)
+    response = r.read().decode()
+
+    if(cj) :
+        print(cj)
+
     print(response)
     r.close()
 
     try :
-        last = response[response.rfind(' ') + 1: -1]
+        last = response[response.rfind(' ') + 1: ]
         num = last
         if int(num) >0 :
             u = prefix + num
